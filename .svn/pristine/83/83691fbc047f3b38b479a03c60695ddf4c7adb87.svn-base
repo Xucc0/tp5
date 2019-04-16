@@ -1,0 +1,46 @@
+{include file="public:header"/}
+
+{include file="public:nav"/}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="page-header">
+            <h2>{$cateName}</h2>
+        </div>
+            {volist name="artList" id="art" empty="$empty"}
+            <div>
+                <img class="img-rounded" src="/uploads/{$art.title_img}" style="margin-right: 40px;float: left;width: 100px;height: 85px"/>
+                <div class="content-detail" style="float: left;width: 80%">
+                    <!-- 获取当前文章的id -->
+                    <h4><a href="{:url('index/detail',['id'=>$art.id])}">{$art.title}</a></h4>
+                    <p>作者:{$art.user_id|getUserName}&nbsp;&nbsp;
+                        发布时间：{$art.create_time|date='Y年m月d日'}&nbsp;&nbsp;</p>
+                        阅读量：{$art.pv}
+                    <div>{$art.content|getArtContent}</div>
+                    <hr>
+                </div>
+            </div>
+            {/volist}
+            {$artList|raw}
+            <div class="text-center"></div>
+        </div>
+
+
+    {include file="public:right"/}
+    <!--<div>-->
+        <!--<img class="img-rounded" src=""-->
+             <!--style="margin-right: 10px;float: left;width: 100px;height: 85px"/>-->
+        <!--<div class="content-detail" style="float: left;width: 80%">-->
+            <!--&lt;!&ndash; 获取当前文章的id &ndash;&gt;-->
+            <!--<h4><a href="">标题</a></h4>-->
+            <!--<p>作者:&nbsp;&nbsp;-->
+                <!--发布时间：2018-01-9&nbsp;&nbsp;-->
+            <!--</p>-->
+            <!--<div>文章内容</div>-->
+            <!--<hr/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;{/volist}&ndash;&gt;-->
+
+    <!--<div class="text-center"></div>-->
+

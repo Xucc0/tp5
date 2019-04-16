@@ -1,0 +1,19 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Mac
+ * Date: 2018/8/20
+ * Time: 下午1:52
+ */
+
+namespace module;
+
+
+class Redis extends \Redis
+{
+    public static function redis() {
+        $con = new \Redis();
+        $con->connect(config('redis.host'), config('redis.port'), 5);
+        return $con;
+    }
+}

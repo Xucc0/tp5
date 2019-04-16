@@ -1,0 +1,149 @@
+{include file="public:header"/}
+
+{include file="public:nav"/}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="page-header">
+            <h2>{$art|getCateName}</h2>
+        </div>
+        <div>
+            <div >
+                <!-- 获取当前文章的id -->
+                <h4><a href="{:url('index/detail',['id'=>$art.id])}">{$art.title}</a></h4>
+                <p>作者:{$art.user_id|getUserName}&nbsp;&nbsp;
+                    发布时间：{$art.create_time|date='Y年m月d日'}&nbsp;&nbsp;
+                阅读量：{$art.pv}&nbsp;&nbsp;
+                点赞量：{$like}</p>
+                <div>{:htmlspecialchars_decode($art.content)}</div>
+                <hr/>
+                <button type="button"
+                        class="btn btn-default" id="fav"
+                        user_id="{$art.user_id}" article_id="{$art.id}"
+                        session_id="{$Think.session.user_id}">收藏</button>
+
+                <button type="button"
+                        class="btn btn-warning" id="ok"
+                        user_id="{$art.user_id}" article_id="{$art.id}"
+                        >点赞</button>
+            </div>
+        </div>
+        <div class="text-center"></div>
+    </div>
+<!-- 处理收藏功能 -->
+<script type="text/javascript">
+    $(function(){
+        $('#fav').on('click',function(){
+
+
+
+                //获取当前的用户id与栏目id,因为收藏表中有这二个字段
+            var userId = $(this).attr('user_id')
+            var artId = $(this).attr('article_id')
+            var sessionId = $(this).attr('session_id')
+            if (userId && artId){
+                $.ajax(
+                    {
+                        type: 'get',
+                        url : "{:url('index/index/fav')}",
+                        data: {
+                            user_id    : userId,
+                            article_id : artId,
+                            session_id : sessionId,
+                            time:new Date().getTime()
+                        },
+                        dataType : 'json',
+                        // async: false,
+                        success  : function(data)
+                        {
+                            switch(data.status)
+                            {
+                                case 1:
+                                    $('#fav').attr('class','btn btn-success')
+                                    $('#fav').text(data.message)
+                                    break
+
+                                case 0:
+                                    $('#fav').attr('class','btn btn-default')
+                                    $('#fav').text(data.message)
+                                    break
+
+                                case -1:
+                                    alert(data.message)
+                                    break
+
+                                case -2:
+                                    alert(data.message)
+                                    window.location.href="{:url('user/login')}";
+                                    break
+
+                            }
+                        }
+                    }
+
+                )
+            }
+
+        })
+    })
+    // 点赞功能
+</script>
+    <script type="text/javascript">
+        $(function(){
+            $('#ok').on('click',function(){
+
+
+
+                //获取当前的用户id与栏目id,因为收藏表中有这二个字段
+                var userId = $(this).attr('user_id')
+                var artId = $(this).attr('article_id')
+                var sessionId = $(this).attr('session_id')
+                if (userId && artId){
+                    $.ajax(
+                        {
+                            type: 'get',
+                            url : "{:url('index/index/ok')}",
+                            data: {
+                                user_id    : userId,
+                                article_id : artId,
+                                session_id : sessionId,
+                                time:new Date().getTime()
+                            },
+                            dataType : 'json',
+                            // async: false,
+                            success  : function(data)
+                            {
+                                switch(data.status)
+                                {
+                                    case 1:
+                                        $('#ok').attr('class','btn btn-warning')
+                                        $('#ok').text(data.message)
+                                        break
+
+                                    case 0:
+                                        $('#ok').attr('class','btn btn-default')
+                                        $('#ok').text(data.message)
+                                        break
+
+                                    case -1:
+                                        alert(data.message)
+                                        break
+
+                                    case -2:
+                                        alert(data.message)
+                                        window.location.href="{:url('user/login')}";
+                                        break
+
+                                }
+                            }
+                        }
+
+                    )
+                }
+
+            })
+        })
+    </script>
+
+
+{include file="public:right"/}
