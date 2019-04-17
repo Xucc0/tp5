@@ -14,7 +14,7 @@ public function index()
 {
     //判断用户是否登录
     $this->isLogin();
-    return $this->fetch('user/userList');
+    return $this->redirect('user/userList');
 }
 
 }

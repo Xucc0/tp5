@@ -2,14 +2,13 @@
     <div class="page-header">
         <h2>热门排行</h2>
     </div>
-    <div class="list-group">
-        <a href="#" class="list-group-item active">
-            我是最新的问答
-        </a>
-        <a href="#" class="list-group-item">我是最新的问答</a>
-        <a href="#" class="list-group-item">我是最新的问答</a>
-        <a href="#" class="list-group-item">我是最新的问答c</a>
-        <a href="#" class="list-group-item">我是最新的问答</a>
+    {volist name="hotArtList" id="art"}
+        <a href="{:url('detail',['id'=>$art.id])}" class="list-group-item"
+        {eq name="$i" value="1"}
+           active
+           {/eq}
+    >{$art.title}<span class="badge">{$art.pv}</span></a>
+     {/volist}
     </div>
 </div>
 {include file="public:footer"/}

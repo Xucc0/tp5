@@ -28,7 +28,7 @@
 		<td>{$cate.create_time}</td>
 		
 		<td><a href="{:url('cate/cateEdit',['id'=>$cate.id])}">编辑</a></td>
-		<td><a href="" onclick="dele();return false;">删除</a></td>
+		<td><a href="{:url('cate/cateDelete',['id'=>$cate.id])}" onclick="dele();return false;">删除</a></td>
 	</tr>
 	{/volist}
 </table>

@@ -7,7 +7,7 @@
 
 	<div class="form-group">
 	    <label for="title">网站名称</label>
-	    <input type="text" name="title" class="form-control" id="title" value="{$siteInfo.title}">
+	    <input type="text" name="title" class="form-control" id="title" value="{$siteInfo.name}">
 	</div>
 
 	<div class="form-group">
@@ -17,12 +17,12 @@
 
 	<div class="form-group" >
 	<label>网站描述</label> 
-	<textarea id="editor"  class="form-control" placeholder="文章内容" id="content" name="content" style="min-height: 100px;">{$siteInfo.desc}</textarea>                   
+	<textarea id="editor"  class="form-control" placeholder="文章内容" id="desc" name="desc" style="min-height: 100px;">{$siteInfo.desc}</textarea>
 	</div>
 	
 	{//网站是否关闭}
 	<div class="form-group">
-    <label">网站是否开启:</label>   
+    <label>网站是否开启:</label>
       <label class="radio-inline">
         <input type="radio" name="is_open"  value="1"
       {//如果当前是开启则将它置为选中状态}
@@ -48,7 +48,7 @@
 
 	{//网站是否允许注册}
 	<div class="form-group">
-    <label">是否允许注册:</label>   
+    <label>是否允许注册:</label>
       <label class="radio-inline">
         <input type="radio" name="is_reg"  value="1"
       {//如果当前是允许则将它置为选中状态}
@@ -64,10 +64,7 @@
       {eq name="$siteInfo.is_reg" value="0"}
         checked=""
       {/eq}
-
-     
-
-        > <span class="text-danger">禁止</span>
+          > <span class="text-danger">禁止</span>
       </label>
 	</div>
 

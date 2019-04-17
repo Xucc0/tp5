@@ -36,10 +36,10 @@
 		</td>
 		
 
-        {eq name="$user.id" value="$Think.session.admin_id" }
+        {eq name="$user.id" value="$Think.session.user_id" }
 		<td><a href="{:url('user/userEdit',['id'=>$user.id])}">编辑</a></td>
         {/eq}
-		{neq name="$user.id" value="$Think.session.admin_id" }
+		{neq name="$user.id" value="$Think.session.user_id" }
 		<td><a href="" onclick="dele();return false;">删除</a></td>
 		{/neq}
 

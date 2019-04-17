@@ -27,9 +27,9 @@ class User extends Base
        $map[] = ['password','=',sha1($data['password'])];
        $result = UserModel::where($map)->find();
        if ($result){
-           Session::set('admin_id',$result['id']);
-           Session::set('admin_name',$result['name']);
-           Session::set('admin_level',$result['is_admin']);
+           Session::set('user_id',$result['id']);
+           Session::set('user_name',$result['name']);
+           Session::set('is_admin',$result['is_admin']);
            $this->success('登录成功','admin/user/userList');
        }else{
            $this->error('邮箱或密码错误请重新登录','admin/user/login');
@@ -44,12 +44,12 @@ class User extends Base
     public function userList()
     {
         //获取用户id
-        $data['admin_id'] = Session::get('admin_id');
-        $data['admin_level'] = Session::get('admin_level');
+        $data['user_id'] = Session::get('user_id');
+        $data['is_admin'] = Session::get('is_admin');
         //获取用户信息
-        $userList = UserModel::where('id',$data['admin_id'])->select();
+        $userList = UserModel::where('id',$data['user_id'])->select();
         //如果是超级管理员获取全部信息
-        if ($data['admin_level']==1){
+        if ($data['is_admin']==1){
             $userList = UserModel::select();
         }
         $this->assign('title','用户列表');
